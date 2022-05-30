@@ -3,25 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package paquete3;
+package paquete5;
 
 import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-
 import java.util.ArrayList;
 import paquete1.Calificacion;
-
-/**
- *
- * @author reroes
- */
 public class LecturaArchivoSecuencial {
-
+    
     private ObjectInputStream entrada;
-    private ArrayList<Calificacion> calificaciones;
+    private ArrayList<Hospital> hospital;
     private String nombreArchivo;
 
     public LecturaArchivoSecuencial(String n) {
@@ -44,16 +38,16 @@ public class LecturaArchivoSecuencial {
         nombreArchivo = n;
     }
 
-    public void establecerListaCalificaciones() {
+    public void establecerHospital() {
         // 
-        calificaciones = new ArrayList<>();
+        hospital = new ArrayList<>();
         File f = new File(obtenerNombreArchivo());
         if (f.exists()) {
 
             while (true) {
                 try {
-                    Calificacion registro = (Calificacion) entrada.readObject();
-                    calificaciones.add(registro);
+                    Hospital registro = (Hospital) entrada.readObject();
+                    hospital.add(registro);
                 } catch (EOFException endOfFileException) {
                     return; // se llegó al fin del archivo
 
@@ -70,8 +64,8 @@ public class LecturaArchivoSecuencial {
 
     }
 
-    public ArrayList<Calificacion> obtenerListaCalificaciones() {
-        return calificaciones;
+    public ArrayList<Hospital> obtenerHopital() {
+        return hospital;
     }
 
     public String obtenerNombreArchivo() {
@@ -80,14 +74,13 @@ public class LecturaArchivoSecuencial {
 
     @Override
     public String toString() {
-        String cadena = "Lista de Calificaciones\n";
-        for (int i = 0; i < obtenerListaCalificaciones().size(); i++) {
-            Calificacion p = obtenerListaCalificaciones().get(i);
-            cadena = String.format("%s%s-%.2f-(%s-%s)\n", cadena,
-                    p.obtenerNombreMateria(),
-                    p.obtenerNota(),
-                    p.obtenerProfesor().obtenerNombre(),
-                    p.obtenerProfesor().obtenerTipo());
+        String cadena = "Lista de Hospital\n";
+        for (int i = 0; i < obtenerHopital().size(); i++) {
+            Hospital p = obtenerHopital().get(i);
+            cadena = String.format("%s%s-%d-%,2f\n", cadena,
+                    p.obtenerNombre(),
+                    p.obtenerNumCamas(),
+                    p.obtenerPresupuesto());
         }
 
         return cadena;
@@ -107,8 +100,4 @@ public class LecturaArchivoSecuencial {
             System.exit(1);
         } // fin de catch
     } // fin del método cerrarArchivo
-
-    void establecerListaHospital() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }

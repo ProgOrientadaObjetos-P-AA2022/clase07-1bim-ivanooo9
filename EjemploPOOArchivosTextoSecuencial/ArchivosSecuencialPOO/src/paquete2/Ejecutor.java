@@ -11,12 +11,12 @@ public class Ejecutor {
 
     public static void main(String[] args) {
 
-        // nombre del archivo
+        // nombre del archivo 
         String nombreArchivo = "profesores2.txt";
         
         Profesor profesor1 = new Profesor("Tara Hernandez", "contratado");
         Profesor profesor2 = new Profesor("Gregory Walsh", "nombramiento");
-        Profesor profesor3 = new Profesor("Kevin Page", "nombramiento");
+        Profesor profesor3 = new Profesor(" Kevin Page", "nombramiento");
         
         
         ArchivoEscritura archivo = new ArchivoEscritura(nombreArchivo);
